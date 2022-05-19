@@ -1,0 +1,21 @@
+version: '3'
+services:
+  nginx:
+   build: . 
+   container_name: mynginx
+   restart: unless-stopped
+   ports:
+      - 80:80
+      - 8080:8080
+   volumes:
+      - /home/docker/nginx/code/intra:/intra/
+      - /home/docker/nginx/code/wiki:/wiki/
+  bind:
+    image: sameersbn/bind:9.16.1-20200524
+    container_name: tysameer
+    restart: unless-stopped
+    expose:
+      - 53:53
+      - 10000:10000
+    volumes:
+      - /home/docker/bind/data/:/data
